@@ -116,7 +116,9 @@
     <Compile Include="Model\AppUserFormListModel.cs" />
     <Compile Include="Model\CarsFormListModel.cs" />
     <Compile Include="Model\CustomerFormListModel.cs" />
+    <Compile Include="Model\GenericComboboxModel.cs" />
     <Compile Include="Model\InsuranceCompanyFormListModel.cs" />
+    <Compile Include="Model\RentalFormListModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RentalForm.cs">
@@ -158,6 +160,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Rental_Form.resx">
+      <DependentUpon>Rental_Form.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserManagement_Form.resx">
       <DependentUpon>UserManagement_Form.cs</DependentUpon>
     </EmbeddedResource>
