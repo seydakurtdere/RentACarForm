@@ -1,0 +1,509 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="RentACarModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AppUserForm">
+          <Key>
+            <PropertyRef Name="AppUserFormId" />
+          </Key>
+          <Property Name="AppUserFormId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="100" />
+          <Property Name="UserPassword" Type="nvarchar" MaxLength="100" />
+          <Property Name="CreateDate" Type="date" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="CarsForm">
+          <Key>
+            <PropertyRef Name="CarsFormId" />
+          </Key>
+          <Property Name="CarsFormId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CarBrand" Type="nvarchar" MaxLength="20" />
+          <Property Name="CarModel" Type="nvarchar" MaxLength="20" />
+          <Property Name="CarYear" Type="int" />
+          <Property Name="CarKm" Type="int" />
+          <Property Name="CarDamagedParts" Type="nvarchar" MaxLength="200" />
+          <Property Name="AppUserFormId" Type="int" />
+          <Property Name="CreateDate" Type="date" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="CustomerForm">
+          <Key>
+            <PropertyRef Name="CustomerFormId" />
+          </Key>
+          <Property Name="CustomerFormId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerName" Type="nvarchar" MaxLength="100" />
+          <Property Name="CustomerBirthday" Type="date" />
+          <Property Name="CustomerIdentityNumber" Type="nvarchar" MaxLength="20" />
+          <Property Name="CustomerFatherName" Type="nvarchar" MaxLength="50" />
+          <Property Name="CustomerMotherName" Type="nvarchar" MaxLength="50" />
+          <Property Name="CustomerJob" Type="nvarchar" MaxLength="50" />
+          <Property Name="CustomerDrivingLicenceType" Type="nvarchar" MaxLength="20" />
+          <Property Name="AppUserFormId" Type="int" />
+          <Property Name="CreateDate" Type="date" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="InsuranceCompanyForm">
+          <Key>
+            <PropertyRef Name="InsuranceCompanyFormId" />
+          </Key>
+          <Property Name="InsuranceCompanyFormId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompanyName" Type="nvarchar" MaxLength="50" />
+          <Property Name="OverDayWage" Type="money" />
+          <Property Name="AppUserFormId" Type="int" />
+          <Property Name="CreateDate" Type="date" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="RentalForm">
+          <Key>
+            <PropertyRef Name="RentalFormId" />
+          </Key>
+          <Property Name="RentalFormId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CarsFormId" Type="int" />
+          <Property Name="CustomerFormId" Type="int" />
+          <Property Name="InsuranceCompanyFormId" Type="int" />
+          <Property Name="AppUserFormId" Type="int" />
+          <Property Name="StartDate" Type="date" />
+          <Property Name="EndDate" Type="date" />
+          <Property Name="Wage" Type="money" />
+          <Property Name="VATRate" Type="int" />
+          <Property Name="VATWage" Type="money" />
+          <Property Name="DailyWage" Type="money" />
+          <Property Name="InsuranceWage" Type="money" />
+          <Property Name="CreateDate" Type="date" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <Association Name="FK__CarsForm__AppUse__4BAC3F29">
+          <End Role="AppUserForm" Type="Self.AppUserForm" Multiplicity="0..1" />
+          <End Role="CarsForm" Type="Self.CarsForm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AppUserForm">
+              <PropertyRef Name="AppUserFormId" />
+            </Principal>
+            <Dependent Role="CarsForm">
+              <PropertyRef Name="AppUserFormId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CustomerF__AppUs__5165187F">
+          <End Role="AppUserForm" Type="Self.AppUserForm" Multiplicity="0..1" />
+          <End Role="CustomerForm" Type="Self.CustomerForm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AppUserForm">
+              <PropertyRef Name="AppUserFormId" />
+            </Principal>
+            <Dependent Role="CustomerForm">
+              <PropertyRef Name="AppUserFormId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Insurance__AppUs__4E88ABD4">
+          <End Role="AppUserForm" Type="Self.AppUserForm" Multiplicity="0..1" />
+          <End Role="InsuranceCompanyForm" Type="Self.InsuranceCompanyForm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AppUserForm">
+              <PropertyRef Name="AppUserFormId" />
+            </Principal>
+            <Dependent Role="InsuranceCompanyForm">
+              <PropertyRef Name="AppUserFormId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RentalFor__AppUs__571DF1D5">
+          <End Role="AppUserForm" Type="Self.AppUserForm" Multiplicity="0..1" />
+          <End Role="RentalForm" Type="Self.RentalForm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AppUserForm">
+              <PropertyRef Name="AppUserFormId" />
+            </Principal>
+            <Dependent Role="RentalForm">
+              <PropertyRef Name="AppUserFormId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RentalFor__CarsF__5441852A">
+          <End Role="CarsForm" Type="Self.CarsForm" Multiplicity="0..1" />
+          <End Role="RentalForm" Type="Self.RentalForm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CarsForm">
+              <PropertyRef Name="CarsFormId" />
+            </Principal>
+            <Dependent Role="RentalForm">
+              <PropertyRef Name="CarsFormId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RentalFor__Custo__5535A963">
+          <End Role="CustomerForm" Type="Self.CustomerForm" Multiplicity="0..1" />
+          <End Role="RentalForm" Type="Self.RentalForm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomerForm">
+              <PropertyRef Name="CustomerFormId" />
+            </Principal>
+            <Dependent Role="RentalForm">
+              <PropertyRef Name="CustomerFormId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RentalFor__Insur__5629CD9C">
+          <End Role="InsuranceCompanyForm" Type="Self.InsuranceCompanyForm" Multiplicity="0..1" />
+          <End Role="RentalForm" Type="Self.RentalForm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InsuranceCompanyForm">
+              <PropertyRef Name="InsuranceCompanyFormId" />
+            </Principal>
+            <Dependent Role="RentalForm">
+              <PropertyRef Name="InsuranceCompanyFormId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RentACarModelStoreContainer">
+          <EntitySet Name="AppUserForm" EntityType="Self.AppUserForm" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CarsForm" EntityType="Self.CarsForm" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CustomerForm" EntityType="Self.CustomerForm" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InsuranceCompanyForm" EntityType="Self.InsuranceCompanyForm" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RentalForm" EntityType="Self.RentalForm" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__CarsForm__AppUse__4BAC3F29" Association="Self.FK__CarsForm__AppUse__4BAC3F29">
+            <End Role="AppUserForm" EntitySet="AppUserForm" />
+            <End Role="CarsForm" EntitySet="CarsForm" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CustomerF__AppUs__5165187F" Association="Self.FK__CustomerF__AppUs__5165187F">
+            <End Role="AppUserForm" EntitySet="AppUserForm" />
+            <End Role="CustomerForm" EntitySet="CustomerForm" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Insurance__AppUs__4E88ABD4" Association="Self.FK__Insurance__AppUs__4E88ABD4">
+            <End Role="AppUserForm" EntitySet="AppUserForm" />
+            <End Role="InsuranceCompanyForm" EntitySet="InsuranceCompanyForm" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RentalFor__AppUs__571DF1D5" Association="Self.FK__RentalFor__AppUs__571DF1D5">
+            <End Role="AppUserForm" EntitySet="AppUserForm" />
+            <End Role="RentalForm" EntitySet="RentalForm" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RentalFor__CarsF__5441852A" Association="Self.FK__RentalFor__CarsF__5441852A">
+            <End Role="CarsForm" EntitySet="CarsForm" />
+            <End Role="RentalForm" EntitySet="RentalForm" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RentalFor__Custo__5535A963" Association="Self.FK__RentalFor__Custo__5535A963">
+            <End Role="CustomerForm" EntitySet="CustomerForm" />
+            <End Role="RentalForm" EntitySet="RentalForm" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RentalFor__Insur__5629CD9C" Association="Self.FK__RentalFor__Insur__5629CD9C">
+            <End Role="InsuranceCompanyForm" EntitySet="InsuranceCompanyForm" />
+            <End Role="RentalForm" EntitySet="RentalForm" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RentACarModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AppUserForm">
+          <Key>
+            <PropertyRef Name="AppUserFormId" />
+          </Key>
+          <Property Name="AppUserFormId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="UserPassword" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Precision="0" />
+          <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="CarsForm" Relationship="Self.FK__CarsForm__AppUse__4BAC3F29" FromRole="AppUserForm" ToRole="CarsForm" />
+          <NavigationProperty Name="CustomerForm" Relationship="Self.FK__CustomerF__AppUs__5165187F" FromRole="AppUserForm" ToRole="CustomerForm" />
+          <NavigationProperty Name="InsuranceCompanyForm" Relationship="Self.FK__Insurance__AppUs__4E88ABD4" FromRole="AppUserForm" ToRole="InsuranceCompanyForm" />
+          <NavigationProperty Name="RentalForm" Relationship="Self.FK__RentalFor__AppUs__571DF1D5" FromRole="AppUserForm" ToRole="RentalForm" />
+        </EntityType>
+        <EntityType Name="CarsForm">
+          <Key>
+            <PropertyRef Name="CarsFormId" />
+          </Key>
+          <Property Name="CarsFormId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CarBrand" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CarModel" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CarYear" Type="Int32" />
+          <Property Name="CarKm" Type="Int32" />
+          <Property Name="CarDamagedParts" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="AppUserFormId" Type="Int32" />
+          <Property Name="CreateDate" Type="DateTime" Precision="0" />
+          <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="AppUserForm" Relationship="Self.FK__CarsForm__AppUse__4BAC3F29" FromRole="CarsForm" ToRole="AppUserForm" />
+          <NavigationProperty Name="RentalForm" Relationship="Self.FK__RentalFor__CarsF__5441852A" FromRole="CarsForm" ToRole="RentalForm" />
+        </EntityType>
+        <EntityType Name="CustomerForm">
+          <Key>
+            <PropertyRef Name="CustomerFormId" />
+          </Key>
+          <Property Name="CustomerFormId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerBirthday" Type="DateTime" Precision="0" />
+          <Property Name="CustomerIdentityNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerFatherName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerMotherName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerJob" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerDrivingLicenceType" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="AppUserFormId" Type="Int32" />
+          <Property Name="CreateDate" Type="DateTime" Precision="0" />
+          <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="AppUserForm" Relationship="Self.FK__CustomerF__AppUs__5165187F" FromRole="CustomerForm" ToRole="AppUserForm" />
+          <NavigationProperty Name="RentalForm" Relationship="Self.FK__RentalFor__Custo__5535A963" FromRole="CustomerForm" ToRole="RentalForm" />
+        </EntityType>
+        <EntityType Name="InsuranceCompanyForm">
+          <Key>
+            <PropertyRef Name="InsuranceCompanyFormId" />
+          </Key>
+          <Property Name="InsuranceCompanyFormId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OverDayWage" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="AppUserFormId" Type="Int32" />
+          <Property Name="CreateDate" Type="DateTime" Precision="0" />
+          <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="AppUserForm" Relationship="Self.FK__Insurance__AppUs__4E88ABD4" FromRole="InsuranceCompanyForm" ToRole="AppUserForm" />
+          <NavigationProperty Name="RentalForm" Relationship="Self.FK__RentalFor__Insur__5629CD9C" FromRole="InsuranceCompanyForm" ToRole="RentalForm" />
+        </EntityType>
+        <EntityType Name="RentalForm">
+          <Key>
+            <PropertyRef Name="RentalFormId" />
+          </Key>
+          <Property Name="RentalFormId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CarsFormId" Type="Int32" />
+          <Property Name="CustomerFormId" Type="Int32" />
+          <Property Name="InsuranceCompanyFormId" Type="Int32" />
+          <Property Name="AppUserFormId" Type="Int32" />
+          <Property Name="StartDate" Type="DateTime" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Precision="0" />
+          <Property Name="Wage" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="VATRate" Type="Int32" />
+          <Property Name="VATWage" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="DailyWage" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="InsuranceWage" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="CreateDate" Type="DateTime" Precision="0" />
+          <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="AppUserForm" Relationship="Self.FK__RentalFor__AppUs__571DF1D5" FromRole="RentalForm" ToRole="AppUserForm" />
+          <NavigationProperty Name="CarsForm" Relationship="Self.FK__RentalFor__CarsF__5441852A" FromRole="RentalForm" ToRole="CarsForm" />
+          <NavigationProperty Name="CustomerForm" Relationship="Self.FK__RentalFor__Custo__5535A963" FromRole="RentalForm" ToRole="CustomerForm" />
+          <NavigationProperty Name="InsuranceCompanyForm" Relationship="Self.FK__RentalFor__Insur__5629CD9C" FromRole="RentalForm" ToRole="InsuranceCompanyForm" />
+        </EntityType>
+        <Association Name="FK__CarsForm__AppUse__4BAC3F29">
+          <End Role="AppUserForm" Type="Self.AppUserForm" Multiplicity="0..1" />
+          <End Role="CarsForm" Type="Self.CarsForm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AppUserForm">
+              <PropertyRef Name="AppUserFormId" />
+            </Principal>
+            <Dependent Role="CarsForm">
+              <PropertyRef Name="AppUserFormId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CustomerF__AppUs__5165187F">
+          <End Role="AppUserForm" Type="Self.AppUserForm" Multiplicity="0..1" />
+          <End Role="CustomerForm" Type="Self.CustomerForm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AppUserForm">
+              <PropertyRef Name="AppUserFormId" />
+            </Principal>
+            <Dependent Role="CustomerForm">
+              <PropertyRef Name="AppUserFormId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Insurance__AppUs__4E88ABD4">
+          <End Role="AppUserForm" Type="Self.AppUserForm" Multiplicity="0..1" />
+          <End Role="InsuranceCompanyForm" Type="Self.InsuranceCompanyForm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AppUserForm">
+              <PropertyRef Name="AppUserFormId" />
+            </Principal>
+            <Dependent Role="InsuranceCompanyForm">
+              <PropertyRef Name="AppUserFormId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RentalFor__AppUs__571DF1D5">
+          <End Role="AppUserForm" Type="Self.AppUserForm" Multiplicity="0..1" />
+          <End Role="RentalForm" Type="Self.RentalForm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AppUserForm">
+              <PropertyRef Name="AppUserFormId" />
+            </Principal>
+            <Dependent Role="RentalForm">
+              <PropertyRef Name="AppUserFormId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RentalFor__CarsF__5441852A">
+          <End Role="CarsForm" Type="Self.CarsForm" Multiplicity="0..1" />
+          <End Role="RentalForm" Type="Self.RentalForm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CarsForm">
+              <PropertyRef Name="CarsFormId" />
+            </Principal>
+            <Dependent Role="RentalForm">
+              <PropertyRef Name="CarsFormId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RentalFor__Custo__5535A963">
+          <End Role="CustomerForm" Type="Self.CustomerForm" Multiplicity="0..1" />
+          <End Role="RentalForm" Type="Self.RentalForm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomerForm">
+              <PropertyRef Name="CustomerFormId" />
+            </Principal>
+            <Dependent Role="RentalForm">
+              <PropertyRef Name="CustomerFormId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RentalFor__Insur__5629CD9C">
+          <End Role="InsuranceCompanyForm" Type="Self.InsuranceCompanyForm" Multiplicity="0..1" />
+          <End Role="RentalForm" Type="Self.RentalForm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InsuranceCompanyForm">
+              <PropertyRef Name="InsuranceCompanyFormId" />
+            </Principal>
+            <Dependent Role="RentalForm">
+              <PropertyRef Name="InsuranceCompanyFormId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RentACarEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AppUserForm" EntityType="Self.AppUserForm" />
+          <EntitySet Name="CarsForm" EntityType="Self.CarsForm" />
+          <EntitySet Name="CustomerForm" EntityType="Self.CustomerForm" />
+          <EntitySet Name="InsuranceCompanyForm" EntityType="Self.InsuranceCompanyForm" />
+          <EntitySet Name="RentalForm" EntityType="Self.RentalForm" />
+          <AssociationSet Name="FK__CarsForm__AppUse__4BAC3F29" Association="Self.FK__CarsForm__AppUse__4BAC3F29">
+            <End Role="AppUserForm" EntitySet="AppUserForm" />
+            <End Role="CarsForm" EntitySet="CarsForm" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CustomerF__AppUs__5165187F" Association="Self.FK__CustomerF__AppUs__5165187F">
+            <End Role="AppUserForm" EntitySet="AppUserForm" />
+            <End Role="CustomerForm" EntitySet="CustomerForm" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Insurance__AppUs__4E88ABD4" Association="Self.FK__Insurance__AppUs__4E88ABD4">
+            <End Role="AppUserForm" EntitySet="AppUserForm" />
+            <End Role="InsuranceCompanyForm" EntitySet="InsuranceCompanyForm" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RentalFor__AppUs__571DF1D5" Association="Self.FK__RentalFor__AppUs__571DF1D5">
+            <End Role="AppUserForm" EntitySet="AppUserForm" />
+            <End Role="RentalForm" EntitySet="RentalForm" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RentalFor__CarsF__5441852A" Association="Self.FK__RentalFor__CarsF__5441852A">
+            <End Role="CarsForm" EntitySet="CarsForm" />
+            <End Role="RentalForm" EntitySet="RentalForm" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RentalFor__Custo__5535A963" Association="Self.FK__RentalFor__Custo__5535A963">
+            <End Role="CustomerForm" EntitySet="CustomerForm" />
+            <End Role="RentalForm" EntitySet="RentalForm" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RentalFor__Insur__5629CD9C" Association="Self.FK__RentalFor__Insur__5629CD9C">
+            <End Role="InsuranceCompanyForm" EntitySet="InsuranceCompanyForm" />
+            <End Role="RentalForm" EntitySet="RentalForm" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="RentACarModelStoreContainer" CdmEntityContainer="RentACarEntities">
+          <EntitySetMapping Name="AppUserForm">
+            <EntityTypeMapping TypeName="RentACarModel.AppUserForm">
+              <MappingFragment StoreEntitySet="AppUserForm">
+                <ScalarProperty Name="AppUserFormId" ColumnName="AppUserFormId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CarsForm">
+            <EntityTypeMapping TypeName="RentACarModel.CarsForm">
+              <MappingFragment StoreEntitySet="CarsForm">
+                <ScalarProperty Name="CarsFormId" ColumnName="CarsFormId" />
+                <ScalarProperty Name="CarBrand" ColumnName="CarBrand" />
+                <ScalarProperty Name="CarModel" ColumnName="CarModel" />
+                <ScalarProperty Name="CarYear" ColumnName="CarYear" />
+                <ScalarProperty Name="CarKm" ColumnName="CarKm" />
+                <ScalarProperty Name="CarDamagedParts" ColumnName="CarDamagedParts" />
+                <ScalarProperty Name="AppUserFormId" ColumnName="AppUserFormId" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CustomerForm">
+            <EntityTypeMapping TypeName="RentACarModel.CustomerForm">
+              <MappingFragment StoreEntitySet="CustomerForm">
+                <ScalarProperty Name="CustomerFormId" ColumnName="CustomerFormId" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="CustomerBirthday" ColumnName="CustomerBirthday" />
+                <ScalarProperty Name="CustomerIdentityNumber" ColumnName="CustomerIdentityNumber" />
+                <ScalarProperty Name="CustomerFatherName" ColumnName="CustomerFatherName" />
+                <ScalarProperty Name="CustomerMotherName" ColumnName="CustomerMotherName" />
+                <ScalarProperty Name="CustomerJob" ColumnName="CustomerJob" />
+                <ScalarProperty Name="CustomerDrivingLicenceType" ColumnName="CustomerDrivingLicenceType" />
+                <ScalarProperty Name="AppUserFormId" ColumnName="AppUserFormId" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InsuranceCompanyForm">
+            <EntityTypeMapping TypeName="RentACarModel.InsuranceCompanyForm">
+              <MappingFragment StoreEntitySet="InsuranceCompanyForm">
+                <ScalarProperty Name="InsuranceCompanyFormId" ColumnName="InsuranceCompanyFormId" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="OverDayWage" ColumnName="OverDayWage" />
+                <ScalarProperty Name="AppUserFormId" ColumnName="AppUserFormId" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RentalForm">
+            <EntityTypeMapping TypeName="RentACarModel.RentalForm">
+              <MappingFragment StoreEntitySet="RentalForm">
+                <ScalarProperty Name="RentalFormId" ColumnName="RentalFormId" />
+                <ScalarProperty Name="CarsFormId" ColumnName="CarsFormId" />
+                <ScalarProperty Name="CustomerFormId" ColumnName="CustomerFormId" />
+                <ScalarProperty Name="InsuranceCompanyFormId" ColumnName="InsuranceCompanyFormId" />
+                <ScalarProperty Name="AppUserFormId" ColumnName="AppUserFormId" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="Wage" ColumnName="Wage" />
+                <ScalarProperty Name="VATRate" ColumnName="VATRate" />
+                <ScalarProperty Name="VATWage" ColumnName="VATWage" />
+                <ScalarProperty Name="DailyWage" ColumnName="DailyWage" />
+                <ScalarProperty Name="InsuranceWage" ColumnName="InsuranceWage" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
