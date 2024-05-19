@@ -182,6 +182,11 @@ namespace RentACarForm
             MessageBox.Show("Rental informations are showed.");
 
         }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 
 }
