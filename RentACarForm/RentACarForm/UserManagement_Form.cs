@@ -72,7 +72,7 @@ namespace RentACarForm
         private void btn_Update_Click(object sender, EventArgs e)
         {
             RentACarEntities db = new RentACarEntities();
-            AppUserForm appuserform = db.AppUserForm.Where(s => s.IsActive == true && s.AppUserFormId == appuserformId).FirstOrDefault();
+            AppUserForm appuserform = db.AppUserForm.Where(s => s.IsActive == true).FirstOrDefault();
             if (appuserform != null)
             {
                  tbx_UserName.Text= appuserform.UserName;
@@ -106,7 +106,7 @@ namespace RentACarForm
         private void btn_Delete_Click(object sender, EventArgs e)
         {
             RentACarEntities db= new RentACarEntities();
-            var userToDelete = db.AppUserForm.FirstOrDefault(s => s.AppUserFormId == appuserformId && s.IsActive == true);
+            var userToDelete = db.AppUserForm.FirstOrDefault(s => s.IsActive == true);
 
             if (userToDelete != null)
             {

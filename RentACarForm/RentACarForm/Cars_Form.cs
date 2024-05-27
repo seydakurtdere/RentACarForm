@@ -50,7 +50,7 @@ namespace RentACarForm
         {
             RentACarEntities db = new RentACarEntities();
             
-                var carToDelete = db.CarsForm.FirstOrDefault(s => s.CarsFormId==carsformID && s.IsActive==true);
+                var carToDelete = db.CarsForm.FirstOrDefault(s =>s.IsActive==true);
 
                 if (carToDelete != null)
                 {
@@ -132,7 +132,7 @@ namespace RentACarForm
         private void btn_Update_Click(object sender, EventArgs e)
         {      
             RentACarEntities db = new RentACarEntities();
-            CarsForm carsform = db.CarsForm.Where(s => s.IsActive == true && s.CarsFormId == carsformID).FirstOrDefault();
+            CarsForm carsform = db.CarsForm.Where(s => s.IsActive == true).FirstOrDefault();
             if (carsform != null)
             {
                 carsform.CarBrand= tbx_carBrand.Text;

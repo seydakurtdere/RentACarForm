@@ -80,7 +80,7 @@ namespace RentACarForm
         private void btn_Update_Click(object sender, EventArgs e)
         {
             RentACarEntities db= new RentACarEntities();
-            InsuranceCompanyForm insuranceCompanyForm=db.InsuranceCompanyForm.Where(s=>s.IsActive==true&& s.InsuranceCompanyFormId==insurancecompanyformId).FirstOrDefault();
+            InsuranceCompanyForm insuranceCompanyForm=db.InsuranceCompanyForm.Where(s=>s.IsActive==true).FirstOrDefault();
             if(insuranceCompanyForm != null)
             {
                 insuranceCompanyForm.CompanyName=tbx_CompanyName.Text;
@@ -100,7 +100,7 @@ namespace RentACarForm
         private void btn_Delete_Click(object sender, EventArgs e)
         {
             RentACarEntities db=new RentACarEntities();
-            var InsToDelete= db.InsuranceCompanyForm.FirstOrDefault(s=>s.IsActive==true && s.InsuranceCompanyFormId==insurancecompanyformId);
+            var InsToDelete= db.InsuranceCompanyForm.FirstOrDefault(s=>s.IsActive==true);
             {
                 if(InsToDelete!= null)
                 {

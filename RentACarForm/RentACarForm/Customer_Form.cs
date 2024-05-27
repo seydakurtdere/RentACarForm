@@ -92,7 +92,7 @@ namespace RentACarForm
         private void btn_Update_Click(object sender, EventArgs e)
         {         
             RentACarEntities db = new RentACarEntities();
-            CustomerForm customerform = db.CustomerForm.Where(s => s.IsActive == true && s.CustomerFormId == customerformID).FirstOrDefault();
+            CustomerForm customerform = db.CustomerForm.Where(s => s.IsActive == true).FirstOrDefault();
             if (customerform != null)
             {
                 customerform.CustomerName = tbx_CustomerName.Text;
@@ -136,7 +136,7 @@ namespace RentACarForm
         private void btn_Delete_Click(object sender, EventArgs e)
         {
             RentACarEntities db = new RentACarEntities();
-            var customerToDelete = db.CustomerForm.FirstOrDefault(s=>s.CustomerFormId== customerformID&& s.IsActive == true);
+            var customerToDelete = db.CustomerForm.FirstOrDefault(s=>s.IsActive == true);
             {
                 if (customerToDelete != null)
                 {
